@@ -1,4 +1,15 @@
-# PlenOctree Volume Rendering
+# PlenOctree Volume Rendering: AR Fork
+
+PlenOctree Volume Rendering, modified to display PlenOctrees in augmented reality using a front facing camera.
+
+## Modifications
+
+- Change redundant ```GL_CLEAR_BUFFER``` calls to use ```rgba(0., 0., 0., 0.)```.
+- Change hard-coded ```alpha=1.0f``` to match the actual value ```1. - light_intensity``` and upgrade fragment shader to output ```vec4 rgba``` instead of ```vec3 rgb```
+- Add camera feed in the background using HTML
+- TODO: perform localization relative to an AprilTag and use the relative pose to render the PlenOctree.
+
+# Original Description
 
 This is a real-time PlenOctree volume renderer written in C++ using OpenGL,
 constituting part of the code release for:
