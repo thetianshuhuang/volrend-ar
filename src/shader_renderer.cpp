@@ -145,9 +145,7 @@ struct VolumeRenderer::Impl {
             maybe_gen_wire(options.grid_max_depth);
         }
 
-        GLfloat clear_color[] = {options.background_brightness,
-                                 options.background_brightness,
-                                 options.background_brightness, 1.f};
+        GLfloat clear_color[] = {0.f, 0.f, 0.f, 0.f};
         GLfloat depth_inf = 1e9, zero = 0;
 
         glBindFramebuffer(GL_FRAMEBUFFER, fb);

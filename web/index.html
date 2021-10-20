@@ -215,6 +215,9 @@
         </nav>
 
         <div id="content">
+            <div id="camera-container" style="position: fixed; left: 0; top: 0; z-index: -1">
+                <video autoplay="true" id="camera-element" style="width: 100vw; height: 100vh; z-index: -1"></video>
+            </div>
             <div class="emscripten_border">
                 <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()"></canvas>
             </div>
@@ -231,6 +234,15 @@
                   style="background:{bg_color};border:2px solid {border_color}"></span>
             <span class="layers-item-name">{name}</span>
         </div>
+    </script>
+
+    <script>
+        var video = document.querySelector("#camera-element");
+        if(navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({video: true})
+                .then(function (stream) { video.srcObject = stream; })
+                .catch(function (error) { console.log(error); })
+        }
     </script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->

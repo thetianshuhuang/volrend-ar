@@ -557,7 +557,7 @@ bool init_gl() {
     }
     glfwMakeContextCurrent(window);
 
-    glClearColor(1., 1., 1., 1.);  // Clear white
+    glClearColor(0., 0., 0., 0.);  // Clear white
     glClear(GL_COLOR_BUFFER_BIT);
 
     glClearDepthf(1.0);
