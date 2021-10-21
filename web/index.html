@@ -215,8 +215,9 @@
         </nav>
 
         <div id="content">
-            <div id="camera-container" style="position: fixed; left: 0; top: 0; z-index: -1">
-                <video autoplay="true" id="camera-element" style="width: 100vw; height: 100vh; z-index: -1"></video>
+            <div id="camera-container" style="position: fixed; left: 10vh; top: 10vh; width: 800px; height: 600; z-index: -1">
+                <video id="webcam_canvas" autoplay="true" style="display:none"></video>
+                <canvas id="out_canvas"></canvas>
             </div>
             <div class="emscripten_border">
                 <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()"></canvas>
@@ -227,6 +228,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/main.js?v={{ver}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <script type="module" src="reader.js"></script>
 
     <script type="text/template" id="layers-item-template">
         <div class="layers-item{classes}" layer="{id}">
@@ -237,26 +239,29 @@
     </script>
 
     <script>
-        var video = document.querySelector("#camera-element");
-        if(navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({video: true})
-                .then(function (stream) { video.srcObject = stream; })
-                .catch(function (error) { console.log(error); })
-        }
+    function get_angles() {
+
+        let R = detections[0]['pose']['R'];
+
+        pitch_1 = -1 * Math.asin(R[2][0])
+        pitch_2 = Math.PI - pitch_1 
+        roll_1 = Math.atan2(R[2][1] / Math.cos(pitch_1) , R[2][2] / Math.cos(pitch_1)) 
+        roll_2 = Math.atan2(R[2][1] / Math.cos(pitch_2) , R[2][2] / Math.cos(pitch_2)) 
+        yaw_1 = Math.atan2(R[1][0] / Math.cos(pitch_1) , R[0][0] /  Math.cos(pitch_1))
+        yaw_2 = Math.atan2(R[1][0] / Math.cos(pitch_2) , R[0][0] / Math.cos(pitch_2)) 
+
+        pitch = pitch_1 
+        roll = roll_1
+        yaw = yaw_1 
+
+        roll = roll*180/ Math.PI 
+        pitch = pitch*180/ Math.PI
+        yaw = yaw*180/ Math.PI
+
+        return [[roll , pitch , yaw], detections[0]['pose']['t']]
+    }
     </script>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-21408087-2"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-21408087-2');
-    </script>
 </body>
 
 </html>

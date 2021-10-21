@@ -337,6 +337,36 @@ if (EMSCRIPTEN)
         ${PROJECT_BINARY_DIR}/build/js/volrend_web.wasm
         )
 
+    # Modifications to add apriltag
+    add_custom_command(
+        TARGET volrend_web POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+        ${PROJECT_SOURCE_DIR}/web/js/reader.js
+        ${PROJECT_BINARY_DIR}/build/reader.js
+        )
+
+    add_custom_command(
+        TARGET volrend_web POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+        ${PROJECT_SOURCE_DIR}/apriltag-js-standalone/html/apriltag.js
+        ${PROJECT_BINARY_DIR}/build/apriltag.js
+        )
+
+    add_custom_command(
+        TARGET volrend_web POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+        ${PROJECT_SOURCE_DIR}/apriltag-js-standalone/html/apriltag_wasm.js
+        ${PROJECT_BINARY_DIR}/build/apriltag_wasm.js
+        )
+
+    add_custom_command(
+        TARGET volrend_web POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+        ${PROJECT_SOURCE_DIR}/apriltag-js-standalone/html/apriltag_wasm.wasm
+        ${PROJECT_BINARY_DIR}/build/apriltag_wasm.wasm
+        )
+    # End modifications
+
     find_package(Python REQUIRED COMPONENTS Interpreter)
     add_custom_command(
         OUTPUT "${PROJECT_BINARY_DIR}/build/index.html"

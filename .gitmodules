@@ -4,3 +4,6 @@
 [submodule "3rdparty/glm"]
 	path = 3rdparty/glm
 	url = https://github.com/g-truc/glm
+[submodule "apriltag-js-standalone"]
+	path = apriltag-js-standalone
+	url = git@github.com:conix-center/apriltag-js-standalone.git
