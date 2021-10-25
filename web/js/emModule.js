@@ -32,11 +32,14 @@ var cppUpdateFPS = function(fps) {
 
 var onResizeCanvas = function() {
     let canvas = document.getElementById("canvas");
+    /*
     let height = window.innerHeight - $('#header').outerHeight() - 7;
     let width = window.innerWidth;
     canvas.width = width;
     canvas.height = height;
     Volrend.on_resize(width, height);
+    */
+    Volrend.on_resize(canvas.width, canvas.height);
 };
 
 var Volrend = {

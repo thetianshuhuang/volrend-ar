@@ -548,7 +548,7 @@ bool init_gl() {
     /* Initialize GLFW */
     if (!glfwInit()) return false;
 
-    int width = 800, height = 800;
+    int width = 800, height = 600;
     window = glfwCreateWindow(width, height, "volrend viewer", NULL, NULL);
 
     if (!window) {

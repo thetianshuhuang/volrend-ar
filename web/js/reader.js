@@ -26,6 +26,7 @@ async function init() {
     }));
 }
 
+
 async function process_frame() {
 
     let ctx = canvas.getContext("2d");
@@ -41,8 +42,22 @@ async function process_frame() {
       grayscalePixels[j] = grayscale; // single grayscale value
     }
     let detections = await apriltag.detect(grayscalePixels, ctx.canvas.width, ctx.canvas.height);
+    ctx.putImageData(imageData, 0, 0);
 
-    window.detections = detections
+    window.detections = detections;
+
+    if (detections.length > 0) {
+        let t = detections[0].pose.t;
+        let xy = detections[0].center;
+        let x = (xy.x - 400) / 1200;
+        let y = (xy.y - 300) / 1200;
+        let dist = Math.sqrt(t[0]**2 + t[1]**2 + t[2]**2) * 10;
+
+        let center = [x * dist, dist, y * dist]
+        Volrend.set_cam_center(center);
+        Volrend.set_cam_back([0, 1, 0]);
+        console.log(center[0], center[1], center[2]);
+    }
 
     window.requestAnimationFrame(process_frame);
 }
