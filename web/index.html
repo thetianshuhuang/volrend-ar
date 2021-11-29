@@ -22,13 +22,9 @@
     </div>
     <nav class="navbar navbar-expand-md navbar-light bg-light" id="header">
         <span class="navbar-brand">
-            <a href="..#demo-section" class="back-link">
-                <svg viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" />
-                </svg>
-            </a>
             <span id="navbar-title">PlenOctree Viewer</span>
         </span>
+        <span style="position: relative; right: 1em">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-toggle" aria-controls="navbar-toggle" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -73,6 +69,7 @@
             </svg>
             Layers
         </a>
+        </span>
     </nav> <!-- navbar -->
     <div class="wrapper" id="main-wrapper">
         <nav id="options" class="custom-popup">
@@ -83,6 +80,14 @@
             </a>
             <div id="options-container" class="custom-popup-container">
                 <h4>Options</h4>
+                <div class="options-section">
+                    <div class='input-group input-group-sm'>
+                        <div class='input-group-prepend'>
+                            rotation
+                        </div>
+                        <input type="range" class="form-control custom-range slider slider-decomp" min="-3.14" max="3.14" value="0" step="0.01" id="slider-rotation">
+                    </div>
+                </div>
                 <div class="options-section">
                     <div class='input-group input-group-sm'>
                         <div class='input-group-prepend'>
@@ -100,12 +105,6 @@
                             <input class="form-check-input" type="radio" name="qual-radio" id="qual-radio-2" value="2">
                             <label class="form-check-label" for="qual-radio-2">high quality</label>
                         </div>
-                    </div>
-                    <div class='input-group input-group-sm'>
-                        <div class='input-group-prepend'>
-                            backlight
-                        </div>
-                        <input type="range" class="form-control custom-range slider" min="0" max="1" value="1" step="any" id="slider-bgbrightness">
                     </div>
                 </div>
                 <div class="options-section">
@@ -150,23 +149,6 @@
                     </div>
                 </div>
                 <div class="options-section">
-                    <h5>View Direction Shifting (&quot;Relighting&quot;)</h5>
-                    <p class="options-description">
-                        Pseudo-relighting by rotating viewdirs
-                        <a id="vdir-reset-btn">
-                            Reset
-                        </a>
-                    </p>
-                    <div class='input-group input-group-sm'>
-                        <div class='input-group-prepend'>
-                            axis-angle
-                        </div>
-                        <input type="range" class="form-control custom-range slider slider-vdir" min="-0.785" max="0.785" value="0" step="any" id="slider-vdir-x">
-                        <input type="range" class="form-control custom-range slider slider-vdir" min="-0.785" max="0.785" value="0" step="any" id="slider-vdir-y">
-                        <input type="range" class="form-control custom-range slider slider-vdir" min="-0.785" max="0.785" value="0" step="any" id="slider-vdir-z">
-                    </div>
-                </div>
-                <div class="options-section">
                     <h5>Octree Grid</h5>
                     <p class="options-description">
                     </p>
@@ -185,18 +167,6 @@
                         </div>
                         <input type="range" class="form-control custom-range slider" min="0" max="6" value="4" step="1" id="slider-grid-reso">
                     </div>
-                </div>
-                <div class="options-section">
-                    <h5>Mesh</h5>
-                    <p class="options-description">
-                        <span class="pr-3">Adding meshes (prototype)</span>
-                        <a id="mesh-add-cube-btn" class="btn pl-1">
-                            Add Cube
-                        </a>
-                        <a id="mesh-add-sphere-btn" class="btn pl-1">
-                            Add Sphere
-                        </a>
-                    </p>
                 </div>
                 <p id="fps-counter"><span id="fps-counter-val">0.00</span> FPS</p>
             </div>

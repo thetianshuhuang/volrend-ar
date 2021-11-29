@@ -53,10 +53,19 @@ async function process_frame() {
         let y = (xy.y - 300) / 1200;
         let dist = Math.sqrt(t[0]**2 + t[1]**2 + t[2]**2) * 10;
 
-        let center = [x * dist, dist, y * dist]
+        // let center = [x * dist, dist, y * dist];
+        // let back = [0, 1, 0];
+
+        let theta = parseFloat(document.getElementById("slider-rotation").value);
+        let center = [
+            Math.cos(theta) * (x * dist) - Math.sin(theta) * dist,
+            Math.sin(theta) * (x * dist) + Math.cos(theta) * dist,
+            y * dist
+        ];
+        let back = [- Math.sin(theta), Math.cos(theta), 0];
+
         Volrend.set_cam_center(center);
-        Volrend.set_cam_back([0, 1, 0]);
-        console.log(center[0], center[1], center[2]);
+        Volrend.set_cam_back(back);
     }
 
     window.requestAnimationFrame(process_frame);

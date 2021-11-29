@@ -63,8 +63,8 @@
 
 #options.custom-popup {
     top: 5em;
-    left: 1em;
-    min-width: 500px;
+    right: 1em;
+    min-width: 450px;
     max-width: 1000px;
     width: 28%;
 }
